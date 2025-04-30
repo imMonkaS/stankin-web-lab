@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_salon
+    ports:
+      - '${POSTGRES_PORT:-7401}:5432'
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: postgres
+    volumes:
+      - ./temp/pg:/var/lib/postgresql/data
