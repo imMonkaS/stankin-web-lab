@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCurrentUser } from "../api/user";
+import { getCurrentUser, updateCurrentUser } from "../api/user";
 
 const Profile = () => {
   document.title = 'Персона | Профиль'
@@ -16,14 +16,14 @@ const Profile = () => {
             try {
                 const userData = await getCurrentUser();
                 setUser(userData);
-                if (userData.firstName !== null){
-                  setFirstName(userData.firstName)
+                if (userData.first_name != null){
+                  setFirstName(userData.first_name)
                 }
-                if (userData.lastName !== null){
-                  setLastName(userData.firstName)
+                if (userData.last_name != null){
+                  setLastName(userData.last_name)
                 }
-                if (userData.middleName !== null){
-                  setMiddleName(userData.middleName)
+                if (userData.middle_name != null){
+                  setMiddleName(userData.middle_name)
                 }
             } catch (error) {
                 console.error("Ошибка получения пользователя:", error);
@@ -34,6 +34,25 @@ const Profile = () => {
 
     fetchUser();
 }, []);
+
+  const handleChangeData = (e) => {
+    e.preventDefault();
+    const updateUser = async () => {
+      try {
+          const userData = await updateCurrentUser({
+            "first_name": firstName,
+            "last_name": lastName,
+            "middle_name": middleName
+          });
+          // window.location.href = '/profile'
+      } catch (error) {
+          console.error("Ошибка получения пользователя:", error);
+          // localStorage.removeItem("token");
+      }
+  };
+
+  updateUser();
+  }
 
   const handleLogout = (e) => {
     localStorage.removeItem('token');
@@ -50,24 +69,25 @@ const Profile = () => {
               <hr />
               <h1 align="left">Личный кабинет {user && user.username}</h1>
 
-              <form>
+              <form onSubmit={handleChangeData}>
                 <h2 style={{ color: "#8b0000" }}>Данные</h2>
                 <table>
                   <tbody>
                   <tr>
-                      <td><b>ФИО:</b> {user && lastName} {user && firstName} {user && middleName} </td>
+                      <td><b>ФИО:</b> </td>
+                      <td> {user && lastName} {user && firstName} {user && middleName} </td>
                     </tr>
                     <tr>
                       <td><b>Имя:</b></td>
-                      <td><input /></td>
+                      <td><input onChange={e => setFirstName(e.target.value)} /></td>
                     </tr>
                     <tr>
                       <td><b>Фамилия:</b></td>
-                      <td><input /></td>
+                      <td><input onChange={e => setLastName(e.target.value)} /></td>
                     </tr>
                     <tr>
                       <td><b>Отчество:</b></td>
-                      <td><input /></td>
+                      <td><input onChange={e => setMiddleName(e.target.value)} /></td>
                     </tr>
                     <tr>
                       <td><b>Email:</b></td>

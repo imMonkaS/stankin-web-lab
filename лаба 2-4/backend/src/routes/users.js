@@ -8,5 +8,6 @@ const user_router = express.Router();
 user_router.post('/auth/register', authController.register);
 user_router.post('/auth/login', authController.login);
 user_router.get('/current', authMiddleware, userController.getCurrentUser);
+user_router.patch('/', authMiddleware, userController.update);
 
 module.exports = user_router;
