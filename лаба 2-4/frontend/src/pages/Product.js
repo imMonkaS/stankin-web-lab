@@ -18,7 +18,7 @@ const Product = () => {
           console.log(result[0])
         }
       } catch (error) {
-        console.error("Ошибка загрузки продукта:", error);
+        console.error("Ошибка загрузки услуги:", error);
       }
     };
 

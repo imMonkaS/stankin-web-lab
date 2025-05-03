@@ -41,7 +41,7 @@ const Header = () => {
       <tbody>
         <tr>
           <td width="150" align="center"> 
-            <a href="index.html"> 
+            <a href="/"> 
               <img src={logo} width="100" height="100" alt='Persona' />
             </a> 
           </td>
