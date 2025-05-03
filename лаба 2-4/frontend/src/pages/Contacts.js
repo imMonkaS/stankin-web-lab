@@ -15,24 +15,24 @@ const Contacts = () => {
                   <tbody>
                     <tr>
                       <td><label htmlFor="name">Имя:</label></td>
-                      <td><input type="text" id="name" name="name" size="40" /></td>
+                      <td><input className="contact-input" type="text" id="name" name="name" size="40" /></td>
                     </tr>
                     <tr>
                       <td><label htmlFor="email">Email:</label></td>
-                      <td><input type="email" id="email" name="email" size="40" /></td>
+                      <td><input className="contact-input" type="email" id="email" name="email" size="40" /></td>
                     </tr>
                     <tr>
                       <td><label htmlFor="subject">Тема:</label></td>
-                      <td><input type="text" id="subject" name="subject" size="40" /></td>
+                      <td><input className="contact-input" type="text" id="subject" name="subject" size="40" /></td>
                     </tr>
                     <tr>
                       <td><label htmlFor="message">Сообщение:</label></td>
-                      <td><textarea id="message" name="message" rows="5" cols="38"></textarea></td>
+                      <td><textarea className="contact-textarea" id="message" name="message" rows="5" cols="38"></textarea></td>
                     </tr>
                     <tr>
                       <td><label htmlFor="service">Интересующая услуга:</label></td>
                       <td>
-                        <select id="service" name="service">
+                        <select className="contact-select" id="service" name="service">
                           <option>Стрижка</option>
                           <option>Макияж</option>
                           <option>SPA</option>
@@ -48,7 +48,7 @@ const Contacts = () => {
                     </tr>
                     <tr>
                       <td></td>
-                      <td><input type="submit" value="Отправить" /></td>
+                      <td><input className="contact-submit" type="submit" value="Отправить" /></td>
                     </tr>
                   </tbody>
                 </table>

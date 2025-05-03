@@ -55,7 +55,7 @@ useEffect(() => {
               { categories &&
                 categories.map((el, index) => (
                   <div key={index}>
-                    <a href={`/catalog?category=${el.id}`}>{el.name}</a> <br />
+                    <a className='sidebar-link' href={`/catalog?category=${el.id}`}>{el.name}</a> <br />
                   </div>
                 ))
               }

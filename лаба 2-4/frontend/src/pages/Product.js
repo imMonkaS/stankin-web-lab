@@ -46,33 +46,33 @@ const Product = () => {
             <hr />
             <h1 align="left">{product.name}</h1>
 
-            <h2 style={{ color: "#8b0000" }}>Описание товара</h2>
+            <h2 className="product-section-title">Описание товара</h2>
             <img
               src={`${product.image}`}
               width="300"
               height="300"
               align="left"
+              className="product-main-image"
               style={{ marginRight: 20, marginBottom: 20 }}
               alt={product.name}
             />
 
-            <p>{product.short_description}</p>
+            <p className="short-description">{product.short_description}</p>
 
             <div style={{ clear: "both" }}></div>
 
-            <h2 style={{ color: "#8b0000" }}>Характеристики товара</h2>
-            <ul>
+            <h2 className="product-section-title">Характеристики товара</h2>
+            <ul className="characteristics-list">
               {product.properties?.map((prop) => (
                 <li key={prop.id}>
                   <b>{prop.property_name}:</b> {prop.property_value}{" "}
-                  {Number(prop.property_price) > 0 &&
-                    `(+${prop.property_price} ₽)`}
+                  {Number(prop.property_price) > 0 && `(+${prop.property_price} ₽)`}
                 </li>
               ))}
             </ul>
 
-            <h2 style={{ color: "#8b0000" }}>Подробное описание товара</h2>
-            <p>{product.description}</p>
+            <h2 className="product-section-title">Подробное описание товара</h2>
+            <p className="full-description">{product.description}</p>
 
             <hr />
           </td>

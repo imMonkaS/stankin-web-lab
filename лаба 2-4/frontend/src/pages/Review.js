@@ -50,8 +50,8 @@ const [user, setUser] = useState(null);
       <tbody>
         <tr>
           <td width="150" cellPadding="5" valign="top" align="center">
-            <a href="/reviews/post">Оставить отзыв</a><br />
-            <a href="/reviews">Отзывы</a><br />
+            <a className='sidebar-link' href="/reviews/post">Оставить отзыв</a><br />
+            <a className='sidebar-link' href="/reviews">Отзывы</a><br />
           </td>
           <td>
             <hr />

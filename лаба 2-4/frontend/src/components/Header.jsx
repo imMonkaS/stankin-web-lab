@@ -94,7 +94,7 @@ const Header = () => {
                       <td align="left">
                         <input type="submit" value="войти" />
                         &nbsp;
-                        <a href="/register">регистрация</a>
+                        <a className='header-link' href="/register">регистрация</a>
                       </td>
                     </tr>
                 </tbody>
@@ -103,7 +103,7 @@ const Header = () => {
           </td>
             :
           <td width="200" align='center'>
-              <a href="/profile" role="button" data-bs-toggle="dropdown">
+              <a href="/profile" role="button" className='header-link' data-bs-toggle="dropdown">
                   <i className="bi bi-person-circle me-1 profile"></i>
               </a>
           </td>

@@ -9,13 +9,13 @@ const Home = () => {
     <tbody>
       <tr>
         <td width="150" valign="top" align="center">
-          <a href="#persona">Персона</a><br />
-          <a href="#aboutUs">О нас</a><br />
-          <a href="#history">История фирмы</a><br />
-          <a href="#workers">Сотрудники</a><br />
-          <a href="#cons">Наши преимущества</a><br />
-          <a href="#obsl">Что входит в обслуживание</a><br />
-          <a href="#process">Процесс обслуживания</a>
+          <a className='sidebar-link' href="#persona">Персона</a><br />
+          <a className='sidebar-link' href="#aboutUs">О нас</a><br />
+          <a className='sidebar-link' href="#history">История фирмы</a><br />
+          <a className='sidebar-link' href="#workers">Сотрудники</a><br />
+          <a className='sidebar-link' href="#cons">Наши преимущества</a><br />
+          <a className='sidebar-link' href="#obsl">Что входит в обслуживание</a><br />
+          <a className='sidebar-link' href="#process">Процесс обслуживания</a>
         </td>
         <td>
           <h1 align="left" id='persona'>Салон красоты «Персона»</h1>
