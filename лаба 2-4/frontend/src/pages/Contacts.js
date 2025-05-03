@@ -1,13 +1,10 @@
 const Contacts = () => {
+  document.title = 'Персона | Контакты'
     return (
       <table border="0" width="900" cellPadding="5" align="center">
         <tbody>
           <tr>
             <td width="150" cellPadding="5" valign="top" align="center">
-              <a href="index.html">Главная</a><br />
-              <a href="catalog.html">Каталог</a><br />
-              <a href="contacts.html">Контакты</a><br />
-              {/* <a href="#">Страница 4</a> */}
             </td>
             <td>
               <hr />

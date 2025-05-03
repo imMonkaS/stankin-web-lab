@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
+const bcrypt = require('bcryptjs')
 
 const User = sequelize.define('User', {
   id: {
@@ -26,11 +27,11 @@ const User = sequelize.define('User', {
   },
   first_name: {
     type: DataTypes.STRING(100),
-    allowNull: false,
+    allowNull: true,
   },
   last_name: {
     type: DataTypes.STRING(100),
-    allowNull: false,
+    allowNull: true,
   },
   middle_name: {
     type: DataTypes.STRING(100),
@@ -43,6 +44,11 @@ const User = sequelize.define('User', {
 }, {
   tableName: 'users',
   timestamps: false,
+  hooks: {
+    beforeCreate: async (user) => {
+        user.password = await bcrypt.hash(user.password, 10);
+    }
+  },
   charset: 'cp1251',
   collate: 'cp1251_general_ci',
   indexes: [

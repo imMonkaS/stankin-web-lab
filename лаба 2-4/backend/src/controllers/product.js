@@ -9,6 +9,15 @@ class ProductController {
             res.status(500).json({ error: error.message });
         }
     }
+
+    async getCategories(req, res){
+        try {
+            const categories = await ProductRepository.getCategories();
+            res.json(categories);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = new ProductController();

@@ -1,59 +1,85 @@
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { searchProduct } from "../api/product";
+
 const Product = () => {
-    return (
-      <table border="0" width="900" cellPadding="5" align="center">
-        <tbody>
-          <tr>
-            <td width="150" cellPadding="5" valign="top" align="center">
-              <a href="index.html">Главная</a><br />
-              <a href="catalog.html">Каталог</a><br />
-              <a href="contacts.html">Контакты</a><br />
-              {/* <a href="#">Страница 4</a> */}
-            </td>
-            <td></td>
-            <td>
-              <hr />
-              <h1 align="left">Стрижка и укладка</h1>
-  
-              <h2 style={{ color: "#8b0000" }}>Описание товара</h2>
-              <img
-                src="src/strijka.jpg"
-                width="300"
-                height="300"
-                align="left"
-                style={{ marginRight: 20, marginBottom: 20 }}
-                alt="Стрижка и укладка"
-              />
-  
-              <p>
-                Наши мастера помогут вам подобрать идеальную стрижку и выполнить укладку, которая подчеркнёт вашу индивидуальность.
-                Мы используем только профессиональные инструменты и средства по уходу за волосами.
-              </p>
-  
-              <div style={{ clear: "both" }}></div>
-  
-              <h2 style={{ color: "#8b0000" }}>Характеристики товара</h2>
-              <ul>
-                <li><b>Продолжительность процедуры:</b> от 30 до 60 минут</li>
-                <li><b>Типы услуг:</b> женская, мужская и детская стрижка</li>
-                <li><b>Средства ухода:</b> профессиональные шампуни, кондиционеры, термозащита</li>
-                <li><b>Дополнительно:</b> консультация стилиста включена в стоимость</li>
-              </ul>
-  
-              <h2 style={{ color: "#8b0000" }}>Подробное описание товара</h2>
-              <p>
-                Услуга включает в себя консультацию с мастером, подбор формы стрижки по типу лица, мытьё головы с уходовыми средствами, стрижку,
-                а также финальную укладку с использованием профессиональных стайлинговых продуктов. Мы стремимся, чтобы каждый клиент чувствовал
-                себя уверенно и стильно после посещения нашего салона. Наши мастера регулярно проходят обучение и знают современные тренды в парикмахерском искусстве.
-              </p>
-  
-              <hr />
-              <p style={{ textAlign: "center" }}>&copy; 2025 Персона. Все права защищены.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    );
-  };
-  
-  export default Product;
-  
+  const [searchParams] = useSearchParams();
+  const product_id = searchParams.get("product_id");
+
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        console.log(product_id)
+        const result = await searchProduct({ id: product_id });
+        if (Array.isArray(result) && result.length > 0) {
+          setProduct(result[0]);
+          console.log(result[0])
+        }
+      } catch (error) {
+        console.error("Ошибка загрузки продукта:", error);
+      }
+    };
+
+    if (product_id) {
+      fetchProduct();
+    }
+  }, [product_id]);
+
+  useEffect(() => {
+    document.title = `Персона | ${product?.name || "Услуга"}`;
+  }, [product]);
+
+  if (!product) {
+    return <p align="center">Загрузка...</p>;
+  }
+
+  return (
+    <table border="0" width="900" cellPadding="5" align="center">
+      <tbody>
+        <tr>
+          <td width="150" cellPadding="5" valign="top" align="center">
+          </td>
+          <td></td>
+          <td>
+            <hr />
+            <h1 align="left">{product.name}</h1>
+
+            <h2 style={{ color: "#8b0000" }}>Описание товара</h2>
+            <img
+              src={`${product.image}`}
+              width="300"
+              height="300"
+              align="left"
+              style={{ marginRight: 20, marginBottom: 20 }}
+              alt={product.name}
+            />
+
+            <p>{product.short_description}</p>
+
+            <div style={{ clear: "both" }}></div>
+
+            <h2 style={{ color: "#8b0000" }}>Характеристики товара</h2>
+            <ul>
+              {product.properties?.map((prop) => (
+                <li key={prop.id}>
+                  <b>{prop.property_name}:</b> {prop.property_value}{" "}
+                  {Number(prop.property_price) > 0 &&
+                    `(+${prop.property_price} ₽)`}
+                </li>
+              ))}
+            </ul>
+
+            <h2 style={{ color: "#8b0000" }}>Подробное описание товара</h2>
+            <p>{product.description}</p>
+
+            <hr />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
+
+export default Product;
