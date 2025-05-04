@@ -35,7 +35,6 @@ const Catalog = () => {
           category_id: category_id
         });
         setProducts(resp);
-        console.log(resp);
         if (resp.length === 0) window.location.href = `http://localhost:3000/catalog?category=1`
       } catch (error) {
         console.error("Ошибка получения услуги:", error);

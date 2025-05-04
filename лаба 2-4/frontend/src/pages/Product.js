@@ -2,8 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchProduct } from "../api/product";
 import { addToCart } from "../api/cart";
+import { Image } from "react-bootstrap";
+import ImageCarousel from "../components/ImageCarousel";
 
 const Product = () => {
+  const [images, setImages] = useState(null);
+
+  const [showCarousel, setShowCarousel] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleOpen = (index) => {
+    setCurrentIndex(index);
+    setShowCarousel(true);
+  };
+
   const [searchParams] = useSearchParams();
   const product_id = searchParams.get("product_id");
 
@@ -17,6 +29,11 @@ const Product = () => {
         const result = await searchProduct({ id: product_id });
         if (Array.isArray(result) && result.length > 0) {
           setProduct(result[0]);
+          let tmpImages = []
+          for (const image of result[0].images){
+            tmpImages.push(image.image);
+          }
+          setImages(tmpImages)
         }
       } catch (error) {
         console.error("Ошибка загрузки услуги:", error);
@@ -101,7 +118,36 @@ const Product = () => {
 
               <div style={{ clear: "both" }}></div>
 
-              <h2 className="product-section-title">Характеристики товара</h2>
+              
+              {images && images.length > 0 &&
+              <div>
+                <hr />
+                <h2> Фото </h2>
+                <div className="d-flex flex-wrap gap-3 justify-content-center">
+                  {images.slice(0, 4).map((src, idx) => (
+                    <Image
+                      key={idx}
+                      src={src}
+                      alt={`Slide ${idx + 1}`}
+                      thumbnail
+                      style={{ width: "150px", cursor: "pointer" }}
+                      onClick={() => handleOpen(idx)}
+                    />
+                  ))}
+                </div>
+
+                <ImageCarousel
+                  show={showCarousel}
+                  onHide={() => setShowCarousel(false)}
+                  images={images}
+                  startIndex={currentIndex}
+                />
+                <hr />
+              </div>
+              }
+
+
+              <h2 className="product-section-title">Характеристики услуги</h2>
               <ul className="characteristics-list">
                 {product.properties?.map((prop) => (
                   <li key={prop.id}>
@@ -111,7 +157,7 @@ const Product = () => {
                 ))}
               </ul>
 
-              <h2 className="product-section-title">Подробное описание товара</h2>
+              <h2 className="product-section-title">Подробное описание услуги</h2>
               <p className="full-description">{product.description}</p>
 
               <hr />
