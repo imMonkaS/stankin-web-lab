@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchProduct } from "../api/product";
+import { addToCart } from "../api/cart";
 
 const Product = () => {
   const [searchParams] = useSearchParams();
@@ -11,11 +12,9 @@ const Product = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        console.log(product_id)
         const result = await searchProduct({ id: product_id });
         if (Array.isArray(result) && result.length > 0) {
           setProduct(result[0]);
-          console.log(result[0])
         }
       } catch (error) {
         console.error("Ошибка загрузки услуги:", error);
@@ -31,6 +30,19 @@ const Product = () => {
     document.title = `Персона | ${product?.name || "Услуга"}`;
   }, [product]);
 
+  const handleOrderClick = async () => {
+    try {
+      await addToCart({
+        product_id: product.id,
+        quantity: 1,
+      });
+      alert("Товар добавлен в корзину!");
+    } catch (error) {
+      console.error("Ошибка при добавлении в корзину:", error);
+      alert("Не удалось добавить в корзину.");
+    }
+  };
+
   if (!product) {
     return <p align="center">Загрузка...</p>;
   }
@@ -39,8 +51,7 @@ const Product = () => {
     <table border="0" width="900" cellPadding="5" align="center">
       <tbody>
         <tr>
-          <td width="150" cellPadding="5" valign="top" align="center">
-          </td>
+          <td width="150" cellPadding="5" valign="top" align="center"></td>
           <td></td>
           <td>
             <hr />
@@ -75,6 +86,21 @@ const Product = () => {
             <p className="full-description">{product.description}</p>
 
             <hr />
+
+            <button
+              onClick={handleOrderClick}
+              style={{
+                padding: "10px 20px",
+                fontSize: "16px",
+                backgroundColor: "#5cb85c",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer"
+              }}
+            >
+              🛒 Заказать
+            </button>
           </td>
         </tr>
       </tbody>

@@ -14,4 +14,7 @@ router.use('/review', review_router)
 const contact_router = require("./request")
 router.use('/contact', contact_router)
 
+const cart_router = require("./cart")
+router.use('/cart', cart_router)
+
 module.exports = router;

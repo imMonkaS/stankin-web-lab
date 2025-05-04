@@ -106,6 +106,10 @@ const Header = () => {
               <a href="/profile" role="button" className='header-link' data-bs-toggle="dropdown">
                   <i className="bi bi-person-circle me-1 profile"></i>
               </a>
+              &nbsp;
+              <a href="/cart" className='header-link'>
+                <i className="bi bi-cart me-1 profile"></i>
+              </a>
           </td>
             }
         </tr>

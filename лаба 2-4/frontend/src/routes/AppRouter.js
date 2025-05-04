@@ -12,6 +12,7 @@ import Review from "../pages/Review";
 import Reviews from "../pages/Reviews";
 import NotFound from "../pages/NotFound";
 import Search from "../pages/Search";
+import Cart from "../pages/Cart";
 
 
 const AppRouter = () => {
@@ -30,6 +31,7 @@ const AppRouter = () => {
                 <Route path="/reviews/post" element={<Review />} />
                 <Route path="/reviews" element={<Reviews />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/cart" element={<Cart />} />
 
                 <Route path="*" element={<NotFound />} />
             </Routes>
