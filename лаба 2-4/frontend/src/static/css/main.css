@@ -127,4 +127,13 @@
     background-color: #a80000;
   }
 
+  .confidential-link{
+    cursor: pointer;
+    transition: .2s;
+  }
+
+  .confidential-link:hover{
+    transform: scale(1.02);
+  }
+
   

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { postContactRequest } from "../api/contactRequest"; // предполагаемое API
+import OpenDocumentButton from "../components/OpenDocumentButton";
 
 const Contacts = () => {
   document.title = 'Персона | Контакты';
@@ -98,6 +99,8 @@ const Contacts = () => {
                 </tbody>
               </table>
             </form>
+
+            <OpenDocumentButton />
 
             {/* Остальная часть контактов и карты — без изменений */}
             <hr />

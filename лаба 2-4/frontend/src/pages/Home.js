@@ -3,6 +3,7 @@ import interier from '../static/imgs/interier.jpg';
 import React, { useState } from 'react';
 import { Image } from "react-bootstrap";
 import ImageCarousel from '../components/ImageCarousel';
+import OpenDocumentButton from '../components/OpenDocumentButton';
 
 const Home = () => {
   document.title = 'Персона | Главная'
@@ -46,8 +47,9 @@ const Home = () => {
               <b><i>Сделайте первый шаг к совершенству вместе с нами!</i></b>
             </p>
           </div>
-          <hr />
 
+          <hr />
+          <h2> Галерея </h2>
           <div className="d-flex flex-wrap gap-3 justify-content-center">
             {images.slice(0, 4).map((src, idx) => (
               <Image

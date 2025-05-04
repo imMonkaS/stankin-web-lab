@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { postReview } from '../api/review';
 import { getCurrentUser } from '../api/user';
+import OpenDocumentButton from '../components/OpenDocumentButton';
 
 const Review = () => {
   document.title = 'Персона | Отзывы';
@@ -189,6 +190,7 @@ const [agree, setAgree] = useState(false)
                 </table>
               </form>
             )}
+            <OpenDocumentButton />
 
             <hr />
             <p style={{ fontStyle: "italic", color: "#555" }}>
