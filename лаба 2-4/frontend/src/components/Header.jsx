@@ -1,43 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import logo from '../static/imgs/logo_larger_transparent.png';
 import { getCurrentUser, login } from '../api/user';
+import { getCart, getCurrentUsersCart } from '../api/cart'; // 👈 добавь, если есть
 
 const Header = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [user, setUser] = useState(null);
+  const [cartCount, setCartCount] = useState(0); // 👈 новое состояние
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-        const data = await login(username, password);
-        localStorage.setItem("token", data.token);
-        window.location.href = '/'
+      const data = await login(username, password);
+      localStorage.setItem("token", data.token);
+      window.location.href = '/';
     } catch (error) {
-        alert("Ошибка: " + error.error);
+      alert("Ошибка: " + error.error);
     }
   }
 
   useEffect(() => {
-      const fetchUser = async () => {
-          const token = localStorage.getItem("token");
-          if (token) {
-              try {
-                  const userData = await getCurrentUser();
-                  setUser(userData);
-              } catch (error) {
-                  console.error("Ошибка получения пользователя:", error);
-                  // localStorage.removeItem("token");
-              }
-          }
-      };
+    const fetchUser = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const userData = await getCurrentUser();
+          setUser(userData);
+        } catch (error) {
+          console.error("Ошибка получения пользователя:", error);
+        }
+      }
+    };
 
-      fetchUser();
+    const fetchCart = async () => {
+      try {
+        const data = await getCurrentUsersCart(); // 👈 вызываем API корзины
+        const totalCount = data?.reduce((acc, item) => acc + item.quantity, 0) || 0;
+        setCartCount(totalCount);
+      } catch (error) {
+        console.error("Ошибка получения корзины:", error);
+      }
+    };
+
+    fetchUser();
+    fetchCart(); // 👈 загрузка при монтировании
   }, []);
 
   return (
-      <table border="0" width={900} cellPadding="0" cellSpacing="0" align="center" bgcolor="#dddddd">
+    <table border="0" width={900} cellPadding="0" cellSpacing="0" align="center" bgcolor="#dddddd">
       <tbody>
         <tr>
           <td width="150" align="center"> 
@@ -71,12 +82,11 @@ const Header = () => {
             </form>
           </td>
 
-            {
-            !user ?
-          <td width="200">
-            <form onSubmit={handleSubmit}>
-              <table cellPadding="5" width="100%">
-                <tbody>
+          {!user ? (
+            <td width="200">
+              <form onSubmit={handleSubmit}>
+                <table cellPadding="5" width="100%">
+                  <tbody>
                     <tr>
                       <td width="40%" align="right">логин: </td>
                       <td align="right">
@@ -97,21 +107,38 @@ const Header = () => {
                         <a className='header-link' href="/register">регистрация</a>
                       </td>
                     </tr>
-                </tbody>
-              </table>
-            </form>
-          </td>
-            :
-          <td width="200" align='center'>
-              <a href="/profile" role="button" className='header-link' data-bs-toggle="dropdown">
-                  <i className="bi bi-person-circle me-1 profile"></i>
+                  </tbody>
+                </table>
+              </form>
+            </td>
+          ) : (
+            <td width="200" align="center" style={{ position: "relative" }}>
+              <a href="/profile" className='header-link'>
+                <i className="bi bi-person-circle me-1 profile"></i>
               </a>
               &nbsp;
-              <a href="/cart" className='header-link'>
+              <a href="/cart" className='header-link' style={{ position: "relative", display: "inline-block" }}>
                 <i className="bi bi-cart me-1 profile"></i>
+                {cartCount > 0 && (
+                  <span style={{
+                    position: "absolute",
+                    top: "-5px",
+                    right: "-10px",
+                    backgroundColor: "red",
+                    color: "white",
+                    borderRadius: "50%",
+                    padding: "2px 6px",
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                    minWidth: "20px",
+                    textAlign: "center"
+                  }}>
+                    {cartCount > 9 ? "9+" : cartCount}
+                  </span>
+                )}
               </a>
-          </td>
-            }
+            </td>
+          )}
         </tr>
       </tbody>
     </table>
