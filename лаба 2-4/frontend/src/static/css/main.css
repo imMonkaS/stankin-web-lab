@@ -1,139 +1,139 @@
-.profile{
-    font-size: 40px;
+.profile {
+  font-size: 40px;
 }
 
-.main-theme{
-    background-color: #f8f8f8;
+.main-theme {
+  background-color: #f8f8f8;
 }
 
-.header-link, .sidebar-link{
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-    margin: 5px 0;
-    transition: .2s;
+.header-link,
+.sidebar-link {
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 5px 0;
+  transition: .2s;
 }
 
-.header-link{
-    color: #8b0000;
+.header-link {
+  color: #8b0000;
 }
-.sidebar-link{
-    color: #3b3b3b;
+
+.sidebar-link {
+  color: #3b3b3b;
 }
 
 .header-link:hover {
-    color: #c91919;
+  color: #c91919;
 }
 
-.sidebar-link:hover{
-    color: #000000;
+.sidebar-link:hover {
+  color: #000000;
 }
 
 .product-section-title {
-    color: #000000;
-    font-size: 18px;
-    font-weight: 400;
-    background-color: #eaeaea;
-    padding: 8px;
-    margin-top: 20px;
-  }
-  
-  .short-description {
-    color: #707070;
-    font-size: 14px;
-    font-style: italic;
-    line-height: 16px;
-  }
-  
-  .full-description {
-    color: #484343;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    text-align: left;
-  }
-  
-  .characteristics-list {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .characteristics-list li {
-    padding-left: 24px;
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
+  color: #000000;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: #eaeaea;
+  padding: 8px;
+  margin-top: 20px;
+}
 
-  .product-main-image{
-    border: 1px #8b0000 solid;
-  }
+.short-description {
+  color: #707070;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 16px;
+}
+
+.full-description {
+  color: #484343;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.characteristics-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.characteristics-list li {
+  padding-left: 24px;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.product-main-image {
+  border: 1px #8b0000 solid;
+}
 
 
 .contact-input {
-    width: 300px;
-    height: 32px;
-    font-size: 14px;
-    color: #333;
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-  }
-  
-  .contact-textarea {
-    width: 300px;
-    height: 100px;
-    font-size: 14px;
-    color: #333;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    resize: vertical;
-    box-sizing: border-box;
-  }
-  
-  .contact-select {
-    width: 310px;
-    height: 36px;
-    font-size: 14px;
-    color: #333;
-    padding: 4px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-  }
-  
-  .contact-submit {
-    width: 150px;
-    height: 36px;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: #8b0000;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .contact-submit:hover {
-    background-color: #a80000;
-  }
+  width: 300px;
+  height: 32px;
+  font-size: 14px;
+  color: #333;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
 
-  .confidential-link{
-    cursor: pointer;
-    transition: .2s;
-  }
+.contact-textarea {
+  width: 300px;
+  height: 100px;
+  font-size: 14px;
+  color: #333;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  resize: vertical;
+  box-sizing: border-box;
+}
 
-  .confidential-link:hover{
-    transform: scale(1.02);
-  }
+.contact-select {
+  width: 310px;
+  height: 36px;
+  font-size: 14px;
+  color: #333;
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
 
-  
+.contact-submit {
+  width: 150px;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #8b0000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-submit:hover {
+  background-color: #a80000;
+}
+
+.confidential-link {
+  cursor: pointer;
+  transition: .2s;
+}
+
+.confidential-link:hover {
+  transform: scale(1.02);
+}

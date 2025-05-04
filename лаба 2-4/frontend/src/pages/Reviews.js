@@ -50,38 +50,32 @@ const Reviews = () => {
                   boxShadow: "0 2px 5px rgba(0,0,0,0.05)",
                 }}
               >
-                {/* Автор */}
                 <div style={{ position: "absolute", top: "10px", left: "15px", fontWeight: "bold" }}>
                   {review.author?.username || "Аноним"}
                 </div>
 
-                {/* Оценка звёздами */}
                 <div style={{ position: "absolute", top: "10px", right: "15px", color: "#f39c12", fontSize: "18px" }}>
                   {"★".repeat(review.rating) + "☆".repeat(5 - review.rating)}
                 </div>
 
-                {/* Доп. сведения: gender, client_type, source */}
                 <div style={{ position: "absolute", top: "35px", right: "15px", fontSize: "13px", color: "#555", textAlign: "right" }}>
                   {review.client_type === "regular" ? "Постоянный клиент" : "Новый клиент"}<br />
                   {review.source === "friends" ? "Узнал от друзей"
                     : review.source === "internet" ? "Нашел в интернете"
-                    : review.source === "advertising" ? "Узнал из рекламы"
-                    : "Другое"}
+                      : review.source === "advertising" ? "Узнал из рекламы"
+                        : "Другое"}
                 </div>
 
-                {/* Заголовок */}
                 <h3 style={{ marginTop: "40px", marginBottom: "10px", color: "#333" }}>
                   {review.article || "Без заголовка"}
                 </h3>
 
-                {/* Комментарий */}
                 <div style={{ fontStyle: "italic", color: "#333" }}>
                   {review.comment}
                 </div>
               </div>
             ))}
 
-            {/* Пагинация */}
             <div style={{ textAlign: "center", marginTop: 30 }}>
               {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pageNum) => (
                 <button

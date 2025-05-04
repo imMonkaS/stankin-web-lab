@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { postContactRequest } from "../api/contactRequest"; // предполагаемое API
+import { postContactRequest } from "../api/contactRequest";
 import OpenDocumentButton from "../components/OpenDocumentButton";
 
 const Contacts = () => {
@@ -102,7 +102,6 @@ const Contacts = () => {
 
             <OpenDocumentButton />
 
-            {/* Остальная часть контактов и карты — без изменений */}
             <hr />
             <h2 style={{ color: "#8b0000" }}>Адрес</h2>
             <table cellPadding="5">

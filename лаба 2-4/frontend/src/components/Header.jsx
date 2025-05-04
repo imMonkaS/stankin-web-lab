@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import logo from '../static/imgs/logo_larger_transparent.png';
 import { getCurrentUser, login } from '../api/user';
-import { getCart, getCurrentUsersCart } from '../api/cart'; // 👈 добавь, если есть
+import { getCart, getCurrentUsersCart } from '../api/cart';
 
 const Header = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const [cartCount, setCartCount] = useState(0); // 👈 новое состояние
+  const [cartCount, setCartCount] = useState(0);
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = await login(username, password);
@@ -35,7 +35,7 @@ const Header = () => {
 
     const fetchCart = async () => {
       try {
-        const data = await getCurrentUsersCart(); // 👈 вызываем API корзины
+        const data = await getCurrentUsersCart();
         const totalCount = data?.reduce((acc, item) => acc + item.quantity, 0) || 0;
         setCartCount(totalCount);
       } catch (error) {
@@ -44,17 +44,17 @@ const Header = () => {
     };
 
     fetchUser();
-    fetchCart(); // 👈 загрузка при монтировании
+    fetchCart();
   }, []);
 
   return (
     <table border="0" width={900} cellPadding="0" cellSpacing="0" align="center" bgcolor="#dddddd">
       <tbody>
         <tr>
-          <td width="150" align="center"> 
-            <a href="/"> 
+          <td width="150" align="center">
+            <a href="/">
               <img src={logo} width="100" height="100" alt='Persona' />
-            </a> 
+            </a>
           </td>
           <td align="left">
             <h1>Персона</h1>

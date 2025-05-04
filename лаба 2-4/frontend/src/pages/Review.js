@@ -9,12 +9,12 @@ const Review = () => {
   const [rating, setRating] = useState('5');
   const [comment, setComment] = useState('');
   const [submitted, setSubmitted] = useState(false);
-const [user, setUser] = useState(null);
-const [source, setSource] = useState("");
-const [article, setArticle] = useState('')
-const [gender, setGender] = useState('')
-const [clientType, setClientType] = useState('')
-const [agree, setAgree] = useState(false)
+  const [user, setUser] = useState(null);
+  const [source, setSource] = useState("");
+  const [article, setArticle] = useState('')
+  const [gender, setGender] = useState('')
+  const [clientType, setClientType] = useState('')
+  const [agree, setAgree] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const [agree, setAgree] = useState(false)
         gender: gender,
         client_type: clientType,
         source: source
-    });
+      });
       setSubmitted(true);
       setComment('');
       setRating('5');
@@ -38,25 +38,24 @@ const [agree, setAgree] = useState(false)
   };
 
   useEffect(() => {
-        const fetchUser = async () => {
-            const token = localStorage.getItem("token");
-            if (token) {
-                try {
-                    const userData = await getCurrentUser();
-                    setUser(userData);
-                } catch (error) {
-                    console.error("Ошибка получения пользователя:", error);
-                    window.location.href = '/register'
-                    // localStorage.removeItem("token");
-                }
-            }
-            else{
-                window.location.href = '/register'
-            }
-        };
-  
-        fetchUser();
-    }, []);
+    const fetchUser = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const userData = await getCurrentUser();
+          setUser(userData);
+        } catch (error) {
+          console.error("Ошибка получения пользователя:", error);
+          window.location.href = '/register'
+        }
+      }
+      else {
+        window.location.href = '/register'
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   return (
     <table border="0" width="900" cellPadding="5" align="center">
