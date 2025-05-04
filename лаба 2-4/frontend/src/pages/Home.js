@@ -1,8 +1,27 @@
 import enter from '../static/imgs/salon-enter.jpg';
 import interier from '../static/imgs/interier.jpg';
+import React, { useState } from 'react';
+import { Image } from "react-bootstrap";
+import ImageCarousel from '../components/ImageCarousel';
 
 const Home = () => {
   document.title = 'Персона | Главная'
+
+  const images = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_HzGgppHRgEYN0p1S-wMm4zu9O42SCF0AaQ&s",
+    "https://p0.zoon.ru/preview/EcuQcsjgTPjph1EZDndBSA/630x384x85/1/3/0/original_5e29533d4059a73643054f4f_66b9e7e45b9506.83283020.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZZ1nsLs2ubyHLDvJH_N9bBnQS5JZzMxMSRA&s",
+    "https://avatars.mds.yandex.net/get-altay/14451083/2a0000019541bb852955f6a689aa55b81b49/L",
+    "https://p0.zoon.ru/preview/K5FQ2RzlhCCoUgY7PDY-lw/630x384x85/1/b/8/original_566a74ba757e57af248b4579_67d2a95c43f439.85179485.jpg",
+  ];
+
+  const [showCarousel, setShowCarousel] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleOpen = (index) => {
+    setCurrentIndex(index);
+    setShowCarousel(true);
+  };
 
     return (
       <table border="0" width="900" cellPadding="5" align="center" bgcolor="#eeeeee">
@@ -28,6 +47,29 @@ const Home = () => {
             </p>
           </div>
           <hr />
+
+          <div className="d-flex flex-wrap gap-3 justify-content-center">
+            {images.slice(0, 4).map((src, idx) => (
+              <Image
+                key={idx}
+                src={src}
+                alt={`Slide ${idx + 1}`}
+                thumbnail
+                style={{ width: "150px", cursor: "pointer" }}
+                onClick={() => handleOpen(idx)}
+              />
+            ))}
+          </div>
+
+          <ImageCarousel
+            show={showCarousel}
+            onHide={() => setShowCarousel(false)}
+            images={images}
+            startIndex={currentIndex}
+          />
+
+          <hr />
+
           <h2 id='aboutUs'>О нас</h2>
           <p><b>«Персона»</b> — это салон красоты, где профессионализм сочетается с индивидуальным подходом к каждому клиенту. <br />
           Мы стремимся подчеркнуть вашу естественную красоту и подарить чувство уверенности в себе.</p>
