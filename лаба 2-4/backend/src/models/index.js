@@ -5,6 +5,7 @@ const ProductImage = require("./productImage");
 const ProductProperty = require("./productProperty");
 const Review = require("./review");
 const User = require("./user");
+const ContactRequest = require("./contact")
 
 User.hasMany(Cart, { foreignKey: 'user_id', as: 'cartItems' });
 
@@ -57,6 +58,7 @@ module.exports = {
     Cart,
     Category,
     User,
-    Review
+    Review,
+    ContactRequest
 }
   

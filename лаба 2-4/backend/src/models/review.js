@@ -16,6 +16,22 @@ const Review = sequelize.define('Review', {
     type: DataTypes.INTEGER(11),
     allowNull: false,
   },
+  article: {
+    type: DataTypes.STRING(255), // заголовок отзыва
+    allowNull: false,
+  },
+  gender: {
+    type: DataTypes.ENUM('male', 'female'),
+    allowNull: false,
+  },
+  client_type: {
+    type: DataTypes.ENUM('new', 'regular'),
+    allowNull: false,
+  },
+  source: {
+    type: DataTypes.ENUM('friends', 'internet', 'advertising', 'other'),
+    allowNull: false,
+  },
   comment: {
     type: DataTypes.TEXT,
     allowNull: false,
