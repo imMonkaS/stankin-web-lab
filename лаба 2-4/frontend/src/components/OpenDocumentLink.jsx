@@ -10,9 +10,9 @@ const OpenDocumentLink = () => {
     };
 
     return (
-        <span className="confidential-link" onClick={handleOpenDocument}>
+        <label className="confidential-link" onClick={handleOpenDocument}>
             Политика конфиденциальности
-        </span>
+        </label>
     );
 };
 

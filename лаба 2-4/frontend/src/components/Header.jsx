@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import logo from '../static/imgs/logo_larger_transparent.png';
 import { getCurrentUser, login } from '../api/user';
 import { getCart, getCurrentUsersCart } from '../api/cart';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Header = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const [cartCount, setCartCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,9 +45,22 @@ const Header = () => {
       }
     };
 
-    fetchUser();
-    fetchCart();
+    const loadData = async () => {
+      await fetchUser();
+      await fetchCart();
+      setLoading(false);
+    };
+
+    loadData();
   }, []);
+
+  if (loading) {
+    return (
+      <div style={{ textAlign: "center", padding: "20px" }}>
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
 
   return (
     <table border="0" width={900} cellPadding="0" cellSpacing="0" align="center" bgcolor="#dddddd">
