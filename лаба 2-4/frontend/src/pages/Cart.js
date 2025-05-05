@@ -9,6 +9,9 @@ const Cart = () => {
             const items = await getCurrentUsersCart();
             setCartItems(items);
         } catch (error) {
+            if (error.error = "Требуется авторизация"){
+                window.location.href = '/register'
+            }
             console.error("Ошибка при загрузке корзины:", error);
         }
     };
@@ -69,7 +72,7 @@ const Cart = () => {
                                 <img src={product.image} width="100" height="100" alt={product.name} />
                             </td>
                             <td>
-                                <h3>{product.name}</h3>
+                                <h3 style={{cursor: 'pointer'}}> <a style={{ all: 'inherit' }} href={`/catalog/product?product_id=${item.product.id}`}>{product.name} </a></h3>
                                 <p>Цена: {price} ₽</p>
                                 <p>Количество: {item.quantity}</p>
                                 <p><b>Сумма:</b> {sum} ₽</p>
