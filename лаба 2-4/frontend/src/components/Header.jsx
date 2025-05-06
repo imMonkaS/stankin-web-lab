@@ -38,7 +38,7 @@ const Header = () => {
     const fetchCart = async () => {
       try {
         const data = await getCurrentUsersCart();
-        const totalCount = data?.reduce((acc, item) => acc + item.quantity, 0) || 0;
+        const totalCount = data?.length || 0;
         setCartCount(totalCount);
       } catch (error) {
         console.error("Ошибка получения корзины:", error);
