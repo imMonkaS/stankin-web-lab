@@ -26,6 +26,16 @@ class CartRepository {
             ]
         });
     }
+
+    async updateCartQuantity(id, newQuantity) {
+        const cartItem = await Cart.findByPk(id);
+        if (!cartItem) return null;
+        
+        cartItem.quantity = newQuantity;
+        await cartItem.save();
+        
+        return cartItem;
+    }
 }
 
 module.exports = new CartRepository();

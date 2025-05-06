@@ -27,6 +27,14 @@ class CartController {
             res.status(500).json({ error: error.message });
         }
     }
+    async updateCartQuantity(req, res) {
+        try {
+            const request = await CartRepository.updateCartQuantity(req.body.id, req.body.quantity);
+            res.status(201).json(request);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = new CartController();

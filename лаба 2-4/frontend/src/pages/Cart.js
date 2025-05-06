@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getCurrentUsersCart, removeFromCart } from "../api/cart";
+import { getCurrentUsersCart, removeFromCart, updateCartQuantity } from "../api/cart";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -27,6 +27,39 @@ const Cart = () => {
         } catch (error) {
             console.error("Ошибка при удалении из корзины:", error);
             alert("Не удалось удалить товар из корзины.");
+        }
+    };
+
+    const handleIncrease = async (id) => {
+        try {
+            const item = cartItems.find(item => item.id === id);
+            const newQuantity = item.quantity + 1;
+            await updateCartQuantity(id, newQuantity);
+            setCartItems(prev => prev.map(item => 
+                item.id === id ? {...item, quantity: newQuantity} : item
+            ));
+        } catch (error) {
+            console.error("Ошибка при обновлении количества:", error);
+            alert("Не удалось изменить количество.");
+        }
+    };
+
+    const handleDecrease = async (id) => {
+        try {
+            const item = cartItems.find(item => item.id === id);
+            const newQuantity = item.quantity - 1;
+            
+            if (newQuantity <= 0) {
+                await handleRemove(id);
+            } else {
+                await updateCartQuantity(id, newQuantity);
+                setCartItems(prev => prev.map(item => 
+                    item.id === id ? {...item, quantity: newQuantity} : item
+                ));
+            }
+        } catch (error) {
+            console.error("Ошибка при обновлении количества:", error);
+            alert("Не удалось изменить количество.");
         }
     };
 
@@ -74,7 +107,36 @@ const Cart = () => {
                             <td>
                                 <h3 style={{cursor: 'pointer'}}> <a style={{ all: 'inherit' }} href={`/catalog/product?product_id=${item.product.id}`}>{product.name} </a></h3>
                                 <p>Цена: {price} ₽</p>
-                                <p>Количество: {item.quantity}</p>
+                                <p>
+                                    Количество: {item.quantity}
+                                    <button 
+                                        onClick={() => handleDecrease(item.id)}
+                                        style={{
+                                            margin: "0 5px",
+                                            padding: "2px 8px",
+                                            backgroundColor: "#f0ad4e",
+                                            color: "white",
+                                            border: "none",
+                                            borderRadius: "4px",
+                                            cursor: "pointer"
+                                        }}
+                                    >
+                                        -
+                                    </button>
+                                    <button 
+                                        onClick={() => handleIncrease(item.id)}
+                                        style={{
+                                            padding: "2px 8px",
+                                            backgroundColor: "#5cb85c",
+                                            color: "white",
+                                            border: "none",
+                                            borderRadius: "4px",
+                                            cursor: "pointer"
+                                        }}
+                                    >
+                                        +
+                                    </button>
+                                </p>
                                 <p><b>Сумма:</b> {sum} ₽</p>
                             </td>
                             <td align="center" valign="middle">
