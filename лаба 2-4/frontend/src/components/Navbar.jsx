@@ -28,7 +28,7 @@ const Navbar = () => {
           <td align="center"><a className='header-link' href="/">Главная</a></td>
           <td align="center"><a className='header-link' href="/catalog"> Каталог </a></td>
           <td align="center"><a className='header-link' href="/contacts"> Контакты </a></td>
-          {user && <td align="center"><a className='header-link' href="/reviews/post"> Оставить отзыв</a></td>}
+          <td align="center"><a className='header-link' href="/reviews"> Отзывы </a></td>
         </tr>
       </tbody>
     </table>

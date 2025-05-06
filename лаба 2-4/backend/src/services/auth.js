@@ -10,11 +10,11 @@ class AuthService {
         });
     }
 
-    async register(username, email, password) {
+    async register(username, email, password, first_name, last_name, middle_name, phone_number) {
         const existingUser = await User.findOne({ where: { username } });
         if (existingUser) throw new Error('Пользователь уже существует');
 
-        const newUser = await User.create({ username, email, password });
+        const newUser = await User.create({ username, email, password, first_name, last_name, middle_name, phone_number });
         const token = this.generateToken(newUser);
 
         return { token };
